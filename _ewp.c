@@ -25,8 +25,10 @@
 #include <Python.h>
 #include <bytesobject.h>
 #include <openssl/bio.h>
+#include <openssl/opensslv.h>
 #include <openssl/pem.h>
 #include <openssl/pkcs7.h>
+#include <openssl/ssl.h>
 
 /* There are a few subtle differences between Python 2.x and 3.x */
 #if PY_MAJOR_VERSION >= 3
@@ -102,8 +104,8 @@ static PyObject *ewp_sign(PyObject *self, PyObject *args)
     }
 
     /* Write the DER-encoded data to the BIO */
-    if (i2d_PKCS7_bio(bioOutput, p7)) {
-        PyErr_SetString(PyExc_RuntimeError, "unable to sign data");
+    if (!i2d_PKCS7_bio(bioOutput, p7)) {
+        PyErr_SetString(PyExc_RuntimeError, "unable to write signature");
         goto end;
     }
 
@@ -150,7 +152,6 @@ static PyMethodDef EWPMethods[] = {
 };
 
 #ifdef IS_PY3K
-
 static struct PyModuleDef ewpmodule = {
     PyModuleDef_HEAD_INIT,
     "ewp",
@@ -158,17 +159,23 @@ static struct PyModuleDef ewpmodule = {
     -1,
     EWPMethods
 };
-
-PyMODINIT_FUNC PyInit_ewp(void)
-{
-    return PyModule_Create(&ewpmodule);
-}
-
-#else
-
-PyMODINIT_FUNC initewp(void)
-{
-    (void) Py_InitModule("ewp", EWPMethods);
-}
-
 #endif
+
+#ifdef IS_PY3K
+PyMODINIT_FUNC PyInit_ewp(void)
+#else
+PyMODINIT_FUNC initewp(void)
+#endif
+{
+#if OPENSSL_VERSION_NUMBER < 0x10100000
+    /* Prior to OpenSSL 1.1.0, the library must be initialized by calling
+       SSL_library_init() */
+    SSL_library_init();
+#endif
+
+#ifdef IS_PY3K
+    return PyModule_Create(&ewpmodule);
+#else
+    (void) Py_InitModule("ewp", EWPMethods);
+#endif
+}
