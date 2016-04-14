@@ -1,10 +1,14 @@
-from setuptools import find_packages, setup
+from distutils.core import Extension, setup
 
 
 setup(
     name='ewp',
     version='0.1.0',
-    packages=find_packages(),
+    ext_modules=[Extension(
+        'ewp',
+        sources=['ewp.c'],
+        libraries=['crypto', 'ssl'],
+    )],
     author='Nathan Osman',
     author_email='nathan@quickmediasolutions.com',
     description="Support for PayPal's Encrypted Website Payments",
