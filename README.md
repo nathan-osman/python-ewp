@@ -20,18 +20,16 @@ To build and install the module, use the following command:
 
 The module provides two functions:
 
-`sign(key_fn, cert_fn, input)`
+`signature = sign(key_fn, cert_fn, input)`
 
 - `key_fn` - filename of PEM-encoded private key
 - `cert_fn` - filename of PEM-encoded X509 certificate
 - `input` - data to sign
-- returns signature
 
-`encrypt(cert_fn, input)`
+`ciphertext = encrypt(cert_fn, input)`
 
 - `cert_fn` - test
 - `input` - data to sign
-- returns ciphertext
 
 ### Example
 
@@ -39,7 +37,7 @@ The following example assumes you have a private key named "test.key", an X509 c
 
     import ewp
 
-    # String consisting of key=value lines separated by \n
+    # String consisting of key=value lines separated by '\n'
     data = "12345..."
 
     signature = ewp.sign('test.key', 'test.crt', data)
