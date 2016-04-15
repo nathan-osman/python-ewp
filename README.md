@@ -1,8 +1,9 @@
 ## python-ewp
 
-[![License](http://img.shields.io/badge/license-MIT-yellow.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/nathan-osman/python-ewp.svg?branch=master)](https://travis-ci.org/nathan-osman/python-ewp)
 [![PyPI Version](http://img.shields.io/pypi/v/ewp.svg)](https://pypi.python.org/pypi/ewp)
 [![PyPI Downloads](http://img.shields.io/pypi/dm/ewp.svg)](https://pypi.python.org/pypi/ewp)
+[![License](http://img.shields.io/badge/license-MIT-yellow.svg)](http://opensource.org/licenses/MIT)
 
 This module provides the functions necessary to add support for PayPal's Encrypted Website Payments to your shopping cart. The module is provided as an extension written in C to simplify the process of invoking the necessary OpenSSL functions for signing and encrypting data. Support is provided for both Python 2 and Python 3.
 
