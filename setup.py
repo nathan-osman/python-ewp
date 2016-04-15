@@ -6,7 +6,7 @@ setup(
     version='0.1.0',
     ext_modules=[Extension(
         'ewp',
-        sources=['ewp.c'],
+        sources=['src/ewp.c'],
         libraries=['crypto', 'ssl'],
     )],
     author='Nathan Osman',
