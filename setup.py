@@ -1,4 +1,4 @@
-from distutils.core import Extension, setup
+from setuptools import Extension, setup
 
 
 setup(
@@ -9,6 +9,7 @@ setup(
         sources=['src/ewp.c'],
         libraries=['crypto', 'ssl'],
     )],
+    test_suite='tests',
     author='Nathan Osman',
     author_email='nathan@quickmediasolutions.com',
     description="Support for PayPal's Encrypted Website Payments",
