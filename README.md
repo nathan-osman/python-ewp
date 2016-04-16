@@ -19,7 +19,7 @@ In order to build the `ewp` module, you will need the following installed:
 
 To build and install the module, use the following command:
 
-    python setup.py install
+    pip install ewp
 
 ### Usage
 
