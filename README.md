@@ -33,7 +33,7 @@ The module provides two functions:
 
 `ciphertext = encrypt(cert_fn, input)`
 
-- `cert_fn` - test
+- `cert_fn` - filename of PEM-encoded X509 certificate
 - `input` - data to sign
 
 ### Example
