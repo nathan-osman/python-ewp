@@ -30,7 +30,7 @@ class EWPTestCast(TestCase):
         """
         Use OpenSSL to decrypt the ciphertext.
         """
-        plaintext = 'test'
+        plaintext = b'\x00\x01\x02'
         ciphertext = encrypt(self._cert_fn, plaintext)
         p = Popen(
             ['openssl', 'smime', '-decrypt', '-inform', 'DER', '-inkey', self._key_fn],
