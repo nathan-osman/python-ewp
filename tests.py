@@ -33,10 +33,10 @@ class EWPTestCast(TestCase):
         plaintext = b'\x00\x01\x02'
         ciphertext = encrypt(self._cert_fn, plaintext)
         p = Popen(
-            ['openssl', 'smime', '-decrypt', '-inform', 'DER', '-inkey', self._key_fn],
+            ['openssl', 'smime', '-decrypt', '-inform', 'PEM', '-inkey', self._key_fn],
             stdin=PIPE,
             stdout=PIPE,
         )
-        stdout, _ = p.communicate(ciphertext)
+        stdout, _ = p.communicate(ciphertext.encode())
         self.assertEqual(p.returncode, 0)
         self.assertEqual(stdout, plaintext)

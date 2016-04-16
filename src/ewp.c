@@ -228,14 +228,14 @@ static PyObject *ewp_encrypt(PyObject *self, PyObject *args)
     }
 
     /* Write the ciphertext to the BIO */
-    if (!i2d_PKCS7_bio(bioOutput, p7)) {
+    if (!PEM_write_bio_PKCS7_stream(bioOutput, p7, bioInput, PKCS7_BINARY)) {
         PyErr_SetString(PyExc_RuntimeError, "unable to write ciphertext");
         goto end;
     }
 
     /* Obtain a pointer to the data and set the return value */
     outputLen = BIO_get_mem_data(bioOutput, &output);
-    ciphertext = PyBytes_FromStringAndSize(output, outputLen);
+    ciphertext = PyUnicode_FromStringAndSize(output, outputLen);
 
 end:
 
