@@ -3,7 +3,7 @@ from setuptools import Extension, setup
 
 setup(
     name='ewp',
-    version='0.1.0',
+    version='0.1.1',
     ext_modules=[Extension(
         'ewp',
         sources=['src/ewp.c'],
