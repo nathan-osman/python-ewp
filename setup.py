@@ -7,7 +7,13 @@ setup(
     ext_modules=[Extension(
         'ewp',
         sources=['src/ewp.c'],
+        include_dirs=[
+            '/usr/local/opt/openssl/include',  # macOS
+        ],
         libraries=['crypto', 'ssl'],
+        library_dirs=[
+            '/usr/local/opt/openssl/lib',  # macOS
+        ],
     )],
     test_suite='tests',
     author='Nathan Osman',
